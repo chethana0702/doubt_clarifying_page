@@ -1,0 +1,148 @@
+.logo{
+    float: left;
+    object-fit:cover;
+    width: 55px;
+    padding: 10px;
+} 
+#title{
+    display: inline;
+}
+h1{
+    font-family: sans-serif;
+    font-style: bold;
+    font-size: 50pt;
+    color: orange;
+}
+body{
+	background: white;
+	color: #030337;
+	font-family: sans-serif;
+	margin: 0px;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+    background-color: #030337;
+}
+li{
+	display: inline;
+	float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 36px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #E7E7F6;
+    color: #030337;
+}
+.welcome_text{
+	font-family: sans-serif;
+	font-size: 30pt;
+	color: orange;
+	position: absolute;
+    top: 8px;
+    left: 16px;
+}
+.container{
+    position:relative;
+    text-align: center;
+    color: white;
+}
+input {
+    border: 1.5px solid #030337;
+    border-radius: 4px;
+    padding: 7px 30px;
+}
+input[type=submit] {
+    background-color: #030337;
+    color: white;
+    border-radius: 4px;
+    padding: 7px 45px;
+    margin: 0px 60px
+}
+.login_form{
+    float: center;    
+	position: absolute;
+   
+
+}
+.newuser_form{
+    float: center;
+    position: absolute;
+}
+.contactform{
+    float: center;
+    position: absolute;
+}
+h
+h2{
+	padding-left: 10px;
+	font-size: 25pt;
+	font-style: bold;
+}
+a {
+	color: #030337;
+	text-decoration: none;
+	padding-left: 20px;
+}
+a:hover{
+	background-color: white;
+	color: #030337;
+}
+.stuint_form{
+    float: right;
+    font-family: sans-serif;
+	font-size: 30pt;
+	color:orange ;
+	position: absolute;
+    top: 60px;
+    right: 60px;
+
+}
+.container1{
+    position:relative;
+    text-align: center;
+    color: white;
+}
+.tab1{
+    
+    font-family: sans-serif;
+	font-size: 30pt;
+	color:white ;
+	position: absolute;
+    top: 60px;
+    left: 60px;
+}
+.container2{
+    position:relative;
+    text-align: center;
+    color: darkblue;
+}
+.container4{
+    position:relative;
+    text-align: center;
+    color: darkblue;
+}
+.container3{
+    position:absolute;
+    text-align: center;
+    color: darkblue;
+}
+.question_form{
+    float: right;
+    font-family: sans-serif;
+	font-size: 30pt;
+	color:orange ;
+	position: absolute;
+    top: 60px;
+    right: 60px;
+
+}
