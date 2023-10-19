@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Login</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <img class="logo"  src="images/qa.png" alt="LOGO">
+    <h1 id="title">ANY QUESTIONS ?</h1>
+    <div>
+        <ul>
+            <li><a href="index.html"><i class="home"></i>HOME</a></li>
+            <li><a href="login.html">LOGIN</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+        </ul>
+    </div>
+    <div class="container2" >
+    <form class="login_form"  id = "loginForm" style ="padding-left: 40px" action="/getadmins" omethod="post">
+      <fieldset>
+        <legend>LOGIN DETAILS :-</legend>
+        <strong>Username:</strong>
+        <br>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        <br>
+        <br>
+        <strong>Password:</strong>
+        <br>
+        <input type="password" id ="password" name="password" placeholder="Enter your password" required>
+        <br>
+        <br>
+        <strong>User Type:</strong>
+        <br>
+        Teacher <input type="radio" name="user_type" value="Teacher" />
+        Student <input type="radio" name="user_type" value="Student" checked/>
+        <br>
+        <br>
+        <button type="submit" name="Login" >Login</button>
+
+        <script>
+            // Get the form element
+const form = document.getElementById('loginForm');
+
+// Attach a submit event listener to the form
+form.addEventListener('submit', async function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Get the form data
+    const formData = new FormData(form);
+
+    // Process and display the form data
+    const name = formData.get('username');
+    const pass = formData.get('password');
+    const type = formData.get('user_type');
+    
+    if(type== 'Teacher')
+   {
+    try {
+        const response = await fetch('/getAdmins', {
+            method: 'POST',
+            body: formData
+        });
+
+        // Handle the response from the server, if needed
+        const data = await response.json();
+        console.log('Server response:', data);
+        console.log(typeof(data))
+        console.log(data['data'][0])
+        const datalist = data['data']
+        let test = false
+        datalist.forEach(data => {
+          for (let key in data ){
+            if(key=='uname'){
+              if(name==data[key]) test=true
+              else test=false
+            }
+            if(key == 'upassword'){
+              if(pass==data[key]) test=true
+              else test=false
+            }
+            if(test) break
+          }
+        })
+        if(test){
+        window.location.href = 'tecint.html';
+        }else{
+          alert('invalid credentials')
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  }
+    
+  else
+  {
+    try {
+        const response = await fetch('/getStudents', {
+            method: 'POST',
+            body: formData
+        });
+        // Handle the response from the server, if needed
+        const data = await response.json();
+        console.log('Server response:', data);
+        console.log(typeof(data))
+        console.log(data['data'][0])
+        const datalist = data['data']
+        let test = false
+        datalist.forEach(data => {
+          for (let key in data ){
+            if(key=='sname'){
+              if(name==data[key]) test=true
+              else test=false
+            }
+            if(key == 'password'){
+              if(pass==data[key]) test=true
+              else test=false
+            }
+            if(test) break
+          }
+        })
+        if(test){
+          
+          alert("Login successful")
+        window.location.href = 'stuint.html';
+        
+        }else{
+          alert('invalid credentials')
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+     
+  }
+}); 
+
+ </script>
+        
+      </fieldset>
+       <br>
+       <br>
+       <a href="newuser.html">Create New User Account?</a> 
+    </form>
+    <img src="images/bgg.jpg" alt="IMG" width="100%">
+    </div>
+</body>
+</html>

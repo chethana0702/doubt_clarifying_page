@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT INTERFACE</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <img class="logo"  src="images/qa.png" alt="LOGO">
+    <h1 id="title">ANY QUESTIONS ?</h1>
+    <div>
+        <ul>
+            <li><a href="index.html"><i class="home"></i>HOME</a></li>
+            <li><a href="login.html">LOGIN</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+        </ul>
+    </div>
+    <div class ="container1">
+      <form class="stuint_form" id="stuint_form" style ="padding-left: 60px" method="post">
+        <fieldset>
+          <legend>ANY QUESTIONS ?</legend>
+          <div class="search">
+            <br>
+            <br>
+            <input type="number"  name ="stuid" placeholder="Enter your sid" size="50">
+            <br>
+            <br>
+            <input type="text"name="question" placeholder="Post a question" size="50">
+            <br>
+            <br>
+            <button type="submit" name="Submit">POST</button>
+            <br>
+            <br>
+         </div>
+         <br>
+         <br>
+        </fieldset>
+      </form>
+      <table  id = 'answer_table' cellpadding="15" class="tab1" border="1px" style="width:800px; line-height:40px;">
+        <th>Qid</th>
+        <th>Answer</th>
+      </table>
+      <script>
+        async function getques(){
+        try {
+          const table = document.getElementById('answer_table') 
+        
+        const response = await fetch('/getAnswers', {
+            method: 'GET',
+        });
+
+        // Handle the response from the server, if needed
+        const data1 = await response.json();
+        console.log('Server response:', data1);
+        console.log(typeof(data1))
+        console.log(data1['data'][0])
+        const datalist1 = data1['data']
+        let tab = `<tr>
+        <th>Question Id</th>
+        <th>Answer</th>
+      </tr>`
+        datalist1.forEach(element => {
+          console.log(element['qid'],element['answ'])
+          tab += `<tr>
+          <td>${element['qid']} </td>
+          <td>${element['answ']}</td>        
+          </tr>`
+        });
+     table.innerHTML=tab;   
+    } catch (error) {
+        console.error('Error:', error);
+    }} 
+    getques()
+  </script>
+      <img src="images/bgg.jpg" alt="IMG" width="100%">
+      </div>
+      <script type="text/javascript">
+        // Get the form element
+        const form = document.getElementById('stuint_form');
+        // Attach a submit event listener to the form
+        form.addEventListener('submit', async function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+        // Get the form data
+        const formData = new FormData(form);
+        const formData1 = new FormData(event.target)
+        // Process and display the form data
+        const stid = formData.get('stuid');
+        const qus = formData.get('question');
+        
+        console.log(formData1)
+
+        const data = {
+         Sid1 : stid,
+         Ques: qus
+        }
+
+        console.log(data)
+        try {
+          const response = await fetch('/addQuestions', {
+          method: 'POST',
+          headers: {
+           'Content-Type':'application/json'
+          },
+          body:JSON.stringify(data),
+          })
+          if(response.status==200){alert('Question posted')
+         }
+       }
+       catch(error){
+         console.error('Error:',error);
+       }
+     });
+</script>
+</body>
+</html>

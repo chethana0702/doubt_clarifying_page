@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New User Account</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script> src="students.js"</script>
+</head>
+<body>
+    <img class="logo"  src="images/qa.png" alt="LOGO">
+    <h1 id="title">ANY QUESTIONS ?</h1>
+    <div>
+        <ul>
+            <li><a href="index.html"><i class="home"></i>HOME</a></li>
+            <li><a href="login.html">LOGIN</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+        </ul>
+    </div>
+    <div class = "container4">
+    <form class="newuser_form" id="registerform" style ="padding-left: 40px"  method="post">
+     <h2>CREATE NEW USER ACCOUNT</h2>
+     <br>
+     <table cellpadding="10">
+       <strong>ENTER LOGIN DETAILS</strong>
+       <tr>
+        <td>Enter a valid username/name</td>
+        <td><input type="text" name="username" id="uname" required><br><br></td>
+       </tr>
+       <tr>
+        <td>Enter your desired password</td>
+        <td><input type="password" name="password" id="pass" required><br><br></td>
+       </tr>
+     </table>
+     <br>
+     <br>
+     <table cellpadding="10">
+       <strong>ENTER YOUR PERSONAL DETAILS</strong>
+       <tr>
+        <td>Enter your e-mail id</td>
+        <td><input type="text" name="email" id="mail" required><br><br></td>
+       </tr> 
+       <tr>
+        <td>Enter your class</td>
+        <td><input type="text" name="class" id = "class" required><br><br></td>
+       </tr>
+       <tr>
+        <td>Enter your school name</td>
+        <td><input type="text" name="school" id="scname" required><br><br></td>
+       </tr>
+     </table>
+     <br>
+     <button type="submit" name="Submit">Register</button>
+     <br>
+    </form>
+    <img src="images/bgg.jpg" alt="IMG" width="100%">
+    </div>
+    <script type="text/javascript">
+    const form = document.getElementById('registerform');
+    // Attach a submit event listener to the form
+    form.addEventListener('submit', async function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+    // Get the form data
+    const formData = new FormData(form);
+    const formData1 = new FormData(event.target)
+    // Process and display the form data
+    const name = formData.get('username');
+    const pass = formData.get('password');
+    const mail = formData.get('email');
+    const cla = formData.get('class');
+    const sch = formData.get('school');
+
+    console.log(formData1)
+    const data = {
+      Sname:name,
+      Password:pass,
+      Class:cla,
+      School:sch,
+      Smail:mail
+    }
+    console.log(data)
+    try {
+        const response = await  fetch('/addStudent', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    })
+    if(response.status==200){alert('registeration successful')
+    window.location.href='login.html'}
+      }catch (error) {
+        console.error('Error:', error);
+    }
+  });
+    </script>
+</body>
+</html>
